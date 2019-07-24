@@ -30,3 +30,4 @@ $ ./stop.sh
 ## Refs
 
 * [Spinnaker Guides](https://www.spinnaker.io/guides/)
+* [Continuous Delivery Pipelines with Spinnaker and Google Kubernetes Engine](https://cloud.google.com/solutions/continuous-delivery-spinnaker-kubernetes-engine)
