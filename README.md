@@ -4,30 +4,16 @@
 ## Prerequisites
 
 * Docker
-* [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 * [helm](https://helm.sh/)
 * [Spin CLI](https://www.spinnaker.io/guides/spin/)
-* (Optional) [Halyard CLI](https://www.spinnaker.io/setup/install/halyard/)
 
-## Start Spinnaker
+## Spinnaker on Minikube
 
-```sh
-$ ./start.sh
-+ minikube start
-😄  minikube v1.2.0 on darwin (amd64)
-...
-http://192.168.64.9:32635
-```
+See [minikube README](./minikube/README.md).
 
-Open the last displayed URL with the browser and you get Spinnaker UI.
+## Spinnaker on Google Cloud Platform
 
-## Stop Spinnaker
-
-```sh
-$ ./stop.sh
-```
+See [tutorial README](./tutorial/README.md).
 
 ## Refs
 
-* [Spinnaker Guides](https://www.spinnaker.io/guides/)
-* [Continuous Delivery Pipelines with Spinnaker and Google Kubernetes Engine](https://cloud.google.com/solutions/continuous-delivery-spinnaker-kubernetes-engine)
