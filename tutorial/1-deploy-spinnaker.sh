@@ -36,7 +36,6 @@ helm update
 helm version
 
 # Configure Spinnaker
-export BUCKET=$PROJECT-spinnaker-config
 gsutil mb -c regional -l $REGION gs://$BUCKET
 export SA_JSON=$(cat spinnaker-sa.json)
 cat > spinnaker-config.yaml <<EOF

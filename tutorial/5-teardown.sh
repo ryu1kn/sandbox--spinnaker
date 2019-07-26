@@ -10,7 +10,6 @@ gcloud projects remove-iam-policy-binding $PROJECT --role roles/storage.admin --
 gcloud iam service-accounts delete $SA_EMAIL
 gcloud container clusters delete spinnaker-tutorial --zone=$REGION
 gcloud source repos delete sample-app
-export BUCKET=$PROJECT-spinnaker-config
 gsutil -m rm -r gs://$BUCKET
 
 gcloud container images delete gcr.io/$PROJECT/sample-app:v1.0.0
