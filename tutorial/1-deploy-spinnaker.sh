@@ -37,19 +37,20 @@ helm version
 
 # Configure Spinnaker
 gsutil mb -c regional -l $REGION gs://$BUCKET
-export SA_JSON=$(cat spinnaker-sa.json)
+sa_json=$(cat spinnaker-sa.json)
+
 cat > spinnaker-config.yaml <<EOF
 gcs:
   enabled: true
   bucket: $BUCKET
   project: $PROJECT
-  jsonKey: '$SA_JSON'
+  jsonKey: '$sa_json'
 
 dockerRegistries:
 - name: gcr
   address: https://gcr.io
   username: _json_key
-  password: '$SA_JSON'
+  password: '$sa_json'
   email: 1234@5678.com
 
 # Disable minio as the default storage backend
@@ -78,5 +79,5 @@ EOF
 
 # Deploy the Spinnaker chart
 helm install --name $RELEASE_NAME stable/spinnaker -f spinnaker-config.yaml --timeout 600 --version $spinnaker_version --wait
-export DECK_POD=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
-kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
+deck_pod=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward --namespace default $deck_pod 8080:9000 >> /dev/null &
