@@ -11,7 +11,7 @@ spinnaker_version=1.10.2
 
 # Create a GKE cluster
 gcloud config set compute/zone $REGION
-gcloud container clusters create spinnaker-tutorial --machine-type=n1-standard-2
+gcloud container clusters create $CLUSTER_NAME --machine-type=n1-standard-2
 
 # Configure identity and access management
 gcloud iam service-accounts create spinnaker-account --display-name spinnaker-account
