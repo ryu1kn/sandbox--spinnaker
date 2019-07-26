@@ -38,13 +38,13 @@ helm update
 helm version
 
 # Configure Spinnaker
-gsutil mb -c regional -l $REGION gs://$BUCKET
+gsutil mb -c regional -l $REGION gs://$SPINNAKER_CONFIG_BUCKET
 sa_json=$(cat $spinnaker_key)
 
 cat > $spinnaker_config <<EOF
 gcs:
   enabled: true
-  bucket: $BUCKET
+  bucket: $SPINNAKER_CONFIG_BUCKET
   project: $PROJECT
   jsonKey: '$sa_json'
 
