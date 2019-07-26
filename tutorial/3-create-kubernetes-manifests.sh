@@ -2,13 +2,13 @@
 
 set -xeuo pipefail
 
-region=australia-southeast1
+. "$(dirname $0)/config.sh"
 
 ##########################
 ## Prepare your Kubernetes Manifests for use in Spinnaker
 
 export PROJECT=$(gcloud info --format='value(config.project)')
-gsutil mb -l $region gs://$PROJECT-kubernetes-manifests
+gsutil mb -l $REGION gs://$PROJECT-kubernetes-manifests
 gsutil versioning set on gs://$PROJECT-kubernetes-manifests
 
 # In sample-app directory

@@ -4,14 +4,13 @@ set -xeuo pipefail
 
 . "$(dirname $0)/config.sh"
 
-region=australia-southeast1
 spinnaker_version=1.10.2
 
 ##########################
 ## Set up your environment
 
 # Create a GKE cluster
-gcloud config set compute/zone $region
+gcloud config set compute/zone $REGION
 gcloud container clusters create spinnaker-tutorial --machine-type=n1-standard-2
 
 # Configure identity and access management
@@ -41,7 +40,7 @@ helm version
 
 # Configure Spinnaker
 export BUCKET=$PROJECT-spinnaker-config
-gsutil mb -c regional -l $region gs://$BUCKET
+gsutil mb -c regional -l $REGION gs://$BUCKET
 export SA_JSON=$(cat spinnaker-sa.json)
 cat > spinnaker-config.yaml <<EOF
 gcs:

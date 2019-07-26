@@ -4,8 +4,6 @@ set -xeuo pipefail
 
 . "$(dirname $0)/config.sh"
 
-region=australia-southeast1
-
 helm delete --purge $RELEASE_NAME
 kubectl delete -f k8s/services
 export SA_EMAIL=$(gcloud iam service-accounts list \
@@ -15,7 +13,7 @@ gcloud projects remove-iam-policy-binding $PROJECT --role roles/storage.admin --
 export SA_EMAIL=$(gcloud iam service-accounts list \
     --filter="displayName:spinnaker-account" --format='value(email)')
 gcloud iam service-accounts delete $SA_EMAIL
-gcloud container clusters delete spinnaker-tutorial --zone=$region
+gcloud container clusters delete spinnaker-tutorial --zone=$REGION
 gcloud source repos delete sample-app
 export PROJECT=$(gcloud info --format='value(config.project)')
 export BUCKET=$PROJECT-spinnaker-config
