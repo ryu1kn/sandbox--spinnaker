@@ -5,6 +5,8 @@ set -xeuo pipefail
 . "$(dirname $0)/config.sh"
 
 spinnaker_version=1.10.2
+spinnaker_key=spinnaker-sa.json
+spinnaker_config=spinnaker-config.yaml
 
 ##########################
 ## Set up your environment
@@ -16,7 +18,7 @@ gcloud container clusters create $CLUSTER_NAME --machine-type=n1-standard-2
 # Configure identity and access management
 gcloud iam service-accounts create spinnaker-account --display-name spinnaker-account
 gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$SA_EMAIL
-gcloud iam service-accounts keys create spinnaker-sa.json --iam-account $SA_EMAIL
+gcloud iam service-accounts keys create $spinnaker_key --iam-account $SA_EMAIL
 
 # Set up Cloud Pub/Sub to trigger Spinnaker pipelines
 gcloud beta pubsub topics create projects/$PROJECT/topics/gcr
@@ -37,9 +39,9 @@ helm version
 
 # Configure Spinnaker
 gsutil mb -c regional -l $REGION gs://$BUCKET
-sa_json=$(cat spinnaker-sa.json)
+sa_json=$(cat $spinnaker_key)
 
-cat > spinnaker-config.yaml <<EOF
+cat > $spinnaker_config <<EOF
 gcs:
   enabled: true
   bucket: $BUCKET
@@ -78,6 +80,6 @@ halyard:
 EOF
 
 # Deploy the Spinnaker chart
-helm install --name $RELEASE_NAME stable/spinnaker -f spinnaker-config.yaml --timeout 600 --version $spinnaker_version --wait
+helm install --name $RELEASE_NAME stable/spinnaker -f $spinnaker_config --version $spinnaker_version --timeout 600 --wait
 deck_pod=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace default $deck_pod 8080:9000 >> /dev/null &
