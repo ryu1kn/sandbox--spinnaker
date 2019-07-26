@@ -7,9 +7,12 @@ set -xeuo pipefail
 ##########################
 ## Building the Docker image
 
-wget https://gke-spinnaker.storage.googleapis.com/sample-app-v2.tgz
-tar xzfv sample-app-v2.tgz
-cd sample-app
+package_name=$APP_DIR.tgz
+
+wget -O $package_name https://gke-spinnaker.storage.googleapis.com/sample-app-v2.tgz
+mkdir $APP_DIR && tar xzfv $package_name -C $APP_DIR --strip-components 1
+
+cd $APP_DIR
 
 git init
 git add .

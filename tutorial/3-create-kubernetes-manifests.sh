@@ -11,6 +11,8 @@ gsutil mb -l $REGION gs://$KUBE_MANIFEST_BUCKET
 gsutil versioning set on gs://$KUBE_MANIFEST_BUCKET
 
 # In sample-app directory
+cd $APP_DIR
+
 sed -i .bkp s/PROJECT/$PROJECT/g k8s/deployments/* && rm -f k8s/deployments/*.bkp
 git commit -a -m "Set project ID"
 
