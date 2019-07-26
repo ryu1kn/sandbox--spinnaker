@@ -7,7 +7,6 @@ set -xeuo pipefail
 ##########################
 ## Prepare your Kubernetes Manifests for use in Spinnaker
 
-export PROJECT=$(gcloud info --format='value(config.project)')
 gsutil mb -l $REGION gs://$PROJECT-kubernetes-manifests
 gsutil versioning set on gs://$PROJECT-kubernetes-manifests
 
