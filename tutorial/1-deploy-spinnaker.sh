@@ -3,6 +3,7 @@
 set -xeuo pipefail
 
 . "$(dirname $0)/config.sh"
+. "$(dirname $0)/lib/helpers.sh"
 
 spinnaker_version=1.10.2
 spinnaker_key=__spinnaker-sa.json
@@ -17,14 +18,15 @@ gcloud config set compute/zone $ZONE
 gcloud container clusters create $CLUSTER_NAME --machine-type=n1-standard-2
 
 # Configure identity and access management
-gcloud iam service-accounts create spinnaker-account --display-name spinnaker-account
-gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$SA_EMAIL
-gcloud iam service-accounts keys create $spinnaker_key --iam-account $SA_EMAIL
+gcloud iam service-accounts create spinnaker-account --display-name $SERVICE_ACCOUNT_DISPLAY_NAME
+sa_email=$(getServiceAccountEmail $SERVICE_ACCOUNT_DISPLAY_NAME)
+gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$sa_email
+gcloud iam service-accounts keys create $spinnaker_key --iam-account $sa_email
 
 # Set up Cloud Pub/Sub to trigger Spinnaker pipelines
 gcloud beta pubsub topics create projects/$PROJECT/topics/gcr
 gcloud beta pubsub subscriptions create gcr-triggers --topic projects/${PROJECT}/topics/gcr
-gcloud beta pubsub subscriptions add-iam-policy-binding gcr-triggers --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
+gcloud beta pubsub subscriptions add-iam-policy-binding gcr-triggers --role roles/pubsub.subscriber --member serviceAccount:$sa_email
 
 ##################################
 ## Deploying Spinnaker using Helm
