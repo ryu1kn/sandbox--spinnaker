@@ -5,8 +5,8 @@ set -xeuo pipefail
 . "$(dirname $0)/config.sh"
 
 spinnaker_version=1.10.2
-spinnaker_key=spinnaker-sa.json
-spinnaker_config=spinnaker-config.yaml
+spinnaker_key=__spinnaker-sa.json
+spinnaker_config=__spinnaker-config.yaml
 
 ##########################
 ## Set up your environment
