@@ -7,8 +7,8 @@ set -xeuo pipefail
 ##########################
 ## Prepare your Kubernetes Manifests for use in Spinnaker
 
-gsutil mb -l $REGION gs://$PROJECT-kubernetes-manifests
-gsutil versioning set on gs://$PROJECT-kubernetes-manifests
+gsutil mb -l $REGION gs://$KUBE_MANIFEST_BUCKET
+gsutil versioning set on gs://$KUBE_MANIFEST_BUCKET
 
 # In sample-app directory
 sed -i .bkp s/PROJECT/$PROJECT/g k8s/deployments/* && rm -f k8s/deployments/*.bkp
