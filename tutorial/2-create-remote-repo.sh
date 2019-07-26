@@ -15,11 +15,11 @@ git init
 git add .
 git commit -m "Initial commit"
 
-gcloud source repos create sample-app
+gcloud source repos create $APP_REPO_NAME
 
 git config credential.helper gcloud.sh
 
-git remote add origin https://source.developers.google.com/p/$PROJECT/r/sample-app
+git remote add origin https://source.developers.google.com/p/$PROJECT/r/$APP_REPO_NAME
 
 git push origin master
 
