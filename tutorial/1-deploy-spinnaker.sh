@@ -10,9 +10,10 @@ spinnaker_config=__spinnaker-config.yaml
 
 ##########################
 ## Set up your environment
+gcloud services enable container.googleapis.com cloudbuild.googleapis.com sourcerepo.googleapis.com
 
 # Create a GKE cluster
-gcloud config set compute/zone $REGION
+gcloud config set compute/zone $ZONE
 gcloud container clusters create $CLUSTER_NAME --machine-type=n1-standard-2
 
 # Configure identity and access management

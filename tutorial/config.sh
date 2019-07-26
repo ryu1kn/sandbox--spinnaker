@@ -2,6 +2,7 @@
 
 RELEASE_NAME=cd
 REGION=australia-southeast1
+ZONE=$REGION-a
 CLUSTER_NAME=spinnaker-tutorial
 APP_REPO_NAME=sample-app
 
