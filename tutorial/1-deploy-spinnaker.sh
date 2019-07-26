@@ -2,6 +2,8 @@
 
 set -xeuo pipefail
 
+. "$(dirname $0)/config.sh"
+
 region=australia-southeast1
 spinnaker_version=1.10.2
 
@@ -80,6 +82,6 @@ halyard:
 EOF
 
 # Deploy the Spinnaker chart
-helm install -n cd stable/spinnaker -f spinnaker-config.yaml --timeout 600 --version $spinnaker_version --wait
+helm install --name $RELEASE_NAME stable/spinnaker -f spinnaker-config.yaml --timeout 600 --version $spinnaker_version --wait
 export DECK_POD=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &

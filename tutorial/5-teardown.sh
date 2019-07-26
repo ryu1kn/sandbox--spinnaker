@@ -2,9 +2,11 @@
 
 set -xeuo pipefail
 
+. "$(dirname $0)/config.sh"
+
 region=australia-southeast1
 
-helm delete --purge cd
+helm delete --purge $RELEASE_NAME
 kubectl delete -f k8s/services
 export SA_EMAIL=$(gcloud iam service-accounts list \
     --filter="displayName:spinnaker-account" --format='value(email)')
