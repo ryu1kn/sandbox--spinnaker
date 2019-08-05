@@ -17,8 +17,11 @@ gcloud source repos delete $APP_REPO_NAME
 gsutil -m rm -r gs://$SPINNAKER_CONFIG_BUCKET
 gsutil -m rm -r gs://$KUBE_MANIFEST_BUCKET
 
-gcloud container images delete gcr.io/$PROJECT/$APP_REPO_NAME:v1.0.0
-# Remove all the other tags if exist
+image=gcr.io/$PROJECT/$APP_REPO_NAME
+for digest in $(gcloud container images list-tags $image --format='value(digest)')
+do
+    gcloud container images delete -q --force-delete-tags "$image@sha256:$digest"
+done
 
 gcloud services disable container.googleapis.com cloudbuild.googleapis.com sourcerepo.googleapis.com
-gcloud alpha billing projects unlink sandbox--spinnaker
+gcloud alpha billing projects unlink $PROJECT
