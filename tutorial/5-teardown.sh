@@ -19,3 +19,6 @@ gsutil -m rm -r gs://$KUBE_MANIFEST_BUCKET
 
 gcloud container images delete gcr.io/$PROJECT/$APP_REPO_NAME:v1.0.0
 # Remove all the other tags if exist
+
+gcloud services disable container.googleapis.com cloudbuild.googleapis.com sourcerepo.googleapis.com
+gcloud alpha billing projects unlink sandbox--spinnaker

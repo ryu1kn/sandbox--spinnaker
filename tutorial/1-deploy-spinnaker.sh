@@ -9,10 +9,6 @@ spinnaker_version=1.10.2
 spinnaker_key=__spinnaker-sa.json
 spinnaker_config=__spinnaker-config.yaml
 
-##########################
-## Set up your environment
-gcloud services enable container.googleapis.com cloudbuild.googleapis.com sourcerepo.googleapis.com
-
 # Create a GKE cluster
 gcloud config set compute/zone $ZONE
 gcloud container clusters create $CLUSTER_NAME --machine-type=n1-standard-2
