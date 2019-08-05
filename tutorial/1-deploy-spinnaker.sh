@@ -81,4 +81,4 @@ EOF
 # Deploy the Spinnaker chart
 helm install --name $RELEASE_NAME stable/spinnaker -f $spinnaker_config --version $spinnaker_version --timeout 600 --wait
 deck_pod=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
-kubectl port-forward --namespace default $deck_pod 8080:9000 >> /dev/null &
+kubectl port-forward --namespace default $deck_pod $SPINNAKER_LOCAL_MAP_PORT:9000 >> /dev/null &
