@@ -20,9 +20,9 @@ gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --mem
 gcloud iam service-accounts keys create $spinnaker_key --iam-account $sa_email
 
 # Set up Cloud Pub/Sub to trigger Spinnaker pipelines
-gcloud beta pubsub topics create projects/$PROJECT/topics/gcr
-gcloud beta pubsub subscriptions create gcr-triggers --topic projects/${PROJECT}/topics/gcr
-gcloud beta pubsub subscriptions add-iam-policy-binding gcr-triggers --role roles/pubsub.subscriber --member serviceAccount:$sa_email
+gcloud beta pubsub topics create projects/$PROJECT/topics/$PUBSUB_TOPIC
+gcloud beta pubsub subscriptions create $PUBSUB_SUBSCRIPTION --topic projects/${PROJECT}/topics/$PUBSUB_TOPIC
+gcloud beta pubsub subscriptions add-iam-policy-binding $PUBSUB_SUBSCRIPTION --role roles/pubsub.subscriber --member serviceAccount:$sa_email
 
 ##################################
 ## Deploying Spinnaker using Helm
@@ -71,8 +71,8 @@ halyard:
         \$HAL_COMMAND config artifact gcs enable
       enable_pubsub_triggers.sh: |-
         \$HAL_COMMAND config pubsub google enable
-        \$HAL_COMMAND config pubsub google subscription add gcr-triggers \
-          --subscription-name gcr-triggers \
+        \$HAL_COMMAND config pubsub google subscription add $PUBSUB_SUBSCRIPTION \
+          --subscription-name $PUBSUB_SUBSCRIPTION \
           --json-path /opt/gcs/key.json \
           --project $PROJECT \
           --message-format GCR
