@@ -13,10 +13,10 @@ kubectl delete -f $APP_DIR/k8s/services
 
 sa_email=$(getServiceAccountEmail $SERVICE_ACCOUNT_DISPLAY_NAME)
 gcloud projects remove-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$sa_email
-gcloud iam service-accounts delete $sa_email
+gcloud iam service-accounts delete $sa_email --quiet
 
-gcloud container clusters delete $CLUSTER_NAME --zone=$ZONE
-gcloud source repos delete $APP_REPO_NAME
+gcloud container clusters delete $CLUSTER_NAME --zone=$ZONE --quiet
+gcloud source repos delete $APP_REPO_NAME --quiet
 gsutil -m rm -r gs://$SPINNAKER_CONFIG_BUCKET
 gsutil -m rm -r gs://$KUBE_MANIFEST_BUCKET
 
