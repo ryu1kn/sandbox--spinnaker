@@ -18,6 +18,7 @@ gcloud iam service-accounts create spinnaker-account --display-name $SERVICE_ACC
 while [[ "${sa_email:-}" = "" ]]
 do
     sa_email=$(getServiceAccountEmail $SERVICE_ACCOUNT_DISPLAY_NAME)
+    sleep 2
 done
 
 gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$sa_email
@@ -85,4 +86,9 @@ EOF
 # Deploy the Spinnaker chart
 helm install --name $RELEASE_NAME stable/spinnaker -f $spinnaker_config --version $spinnaker_version --timeout 600 --wait
 deck_pod=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
+until [[ "${deck_pod_status:-}" = "Running" ]]
+do
+    deck_pod_status=$(kubectl get pods $deck_pod --namespace default -o jsonpath='{.status.phase}')
+    sleep 2
+done
 kubectl port-forward --namespace default $deck_pod $SPINNAKER_LOCAL_MAP_PORT:9000 >> /dev/null &
