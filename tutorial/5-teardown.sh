@@ -5,8 +5,10 @@ set -xeuo pipefail
 . "$(dirname $0)/config.sh"
 . "$(dirname $0)/lib/helpers.sh"
 
-# TODO: Delete build triggers
-#gcloud alpha builds triggers list
+for trigger_id in $(gcloud alpha builds triggers list | yq r -d'*' -j - 'id' | jq '.[]' --raw-output)
+do
+    gcloud alpha builds triggers delete -q "$trigger_id"
+done
 
 gcloud beta pubsub subscriptions delete $PUBSUB_SUBSCRIPTION
 gcloud beta pubsub topics delete projects/$PROJECT/topics/$PUBSUB_TOPIC
