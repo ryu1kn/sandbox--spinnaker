@@ -1,0 +1,39 @@
+{
+  "schema": "v2",
+  "id": "foobar-template",
+  "variables": [
+    {
+      "type": "int",
+      "defaultValue": 5,
+      "description": "The time a wait stage shall pauseth",
+      "name": "timeToWait"
+    }
+  ],
+  "protect": false,
+  "metadata": {
+    "name": "Variable Wait",
+    "description": "A demonstrative Wait Pipeline.",
+    "owner": "example@example.com",
+    "scopes": ["global"]
+  },
+  "pipeline": {
+    "application": "foobarapp",
+    "id": "529a43b6-ae97-4874-b660-ea5d64a6f44c",
+    "index": 0,
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "anonymous",
+    "limitConcurrent": true,
+    "name": "foobarpipeline",
+    "stages": [
+      {
+        "comments": "Need to wait!",
+        "name": "LetsWait",
+        "refId": "1",
+        "requisiteStageRefIds": [],
+        "type": "wait",
+        "waitTime": "${templateVariables.timeToWait}"
+      }
+    ],
+    "triggers": []
+  }
+}

@@ -1,0 +1,22 @@
+{
+ "appConfig": {},
+ "application": "foobarapp",
+ "id": "4129a838-98de-4c7a-bfe9-f1d2a4bad42b",
+ "index": 0,
+ "keepWaitingPipelines": false,
+ "lastModifiedBy": "anonymous",
+ "limitConcurrent": true,
+ "name": "foobarpipeline",
+ "stages": [
+  {
+   "comments": "Need to wait!",
+   "name": "LetsWait",
+   "refId": "1",
+   "requisiteStageRefIds": [],
+   "type": "wait",
+   "waitTime": 5
+  }
+ ],
+ "triggers": [],
+ "updateTs": "1565158489673"
+}

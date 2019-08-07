@@ -1,0 +1,18 @@
+{
+  "schema": "v2",
+  "application": "foobarapp",
+  "name": "foobarpipeline-from-template",
+  "template": {
+    "source": "spinnaker://foobar-template"
+  },
+  "variables": {
+    "someVar": "some variable",
+    "someOtherVar": "some other variable"
+  },
+  "inherit": [],
+  "triggers": [],
+  "parameters": [],
+  "notifications": [],
+  "description": "",
+  "stages": []
+}
