@@ -5,6 +5,9 @@ set -xeuo pipefail
 . "$(dirname $0)/config.sh"
 . "$(dirname $0)/lib/helpers.sh"
 
+# TODO: Delete build triggers
+#gcloud alpha builds triggers list
+
 gcloud beta pubsub subscriptions delete $PUBSUB_SUBSCRIPTION
 gcloud beta pubsub topics delete projects/$PROJECT/topics/$PUBSUB_TOPIC
 
@@ -17,6 +20,7 @@ gcloud iam service-accounts delete $sa_email --quiet
 
 gcloud container clusters delete $CLUSTER_NAME --zone=$ZONE --quiet
 gcloud source repos delete $APP_REPO_NAME --quiet
+
 gsutil -m rm -r gs://$SPINNAKER_CONFIG_BUCKET
 gsutil -m rm -r gs://$KUBE_MANIFEST_BUCKET
 
