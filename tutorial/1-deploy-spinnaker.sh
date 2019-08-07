@@ -5,7 +5,7 @@ set -xeuo pipefail
 . "$(dirname $0)/config.sh"
 . "$(dirname $0)/lib/helpers.sh"
 
-spinnaker_version=1.10.2
+spinnaker_version=1.14.0
 spinnaker_key=__spinnaker-sa.json
 spinnaker_config=__spinnaker-config.yaml
 
@@ -67,7 +67,7 @@ minio:
 halyard:
   spinnakerVersion: $spinnaker_version
   image:
-    tag: 1.12.0
+    tag: 1.22.2
   additionalScripts:
     create: true
     data:

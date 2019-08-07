@@ -6,6 +6,7 @@
 * Docker
 * [helm](https://helm.sh/)
 * [Spin CLI](https://www.spinnaker.io/guides/spin/)
+* `jq` and `yq`: `brew install jq yq`
 * Environment variable `GCP_BILLING_ACCOUNT_ID` is set
 * Authenticated to GCP with `gcloud auth login`
 
