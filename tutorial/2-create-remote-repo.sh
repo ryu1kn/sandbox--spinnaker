@@ -25,5 +25,3 @@ git config credential.helper gcloud.sh
 git remote add origin https://source.developers.google.com/p/$PROJECT/r/$APP_REPO_NAME
 
 git push origin master
-
-# https://cloud.google.com/solutions/continuous-delivery-spinnaker-kubernetes-engine#configure_your_build_triggers
