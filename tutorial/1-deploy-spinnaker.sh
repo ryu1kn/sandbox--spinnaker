@@ -15,7 +15,7 @@ gcloud container clusters create $CLUSTER_NAME --machine-type=n1-standard-2
 
 # Configure identity and access management
 gcloud iam service-accounts create spinnaker-account --display-name $SERVICE_ACCOUNT_DISPLAY_NAME
-while [[ "$sa_email" = "" ]]
+while [[ "${sa_email:-}" = "" ]]
 do
     sa_email=$(getServiceAccountEmail $SERVICE_ACCOUNT_DISPLAY_NAME)
 done
