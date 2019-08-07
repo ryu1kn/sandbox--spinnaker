@@ -18,7 +18,7 @@ gcloud iam service-accounts create spinnaker-account --display-name $SERVICE_ACC
 while [[ "${sa_email:-}" = "" ]]
 do
     sa_email=$(getServiceAccountEmail $SERVICE_ACCOUNT_DISPLAY_NAME)
-    sleep 2
+    sleep $API_RETRY_INTERVAL_SEC
 done
 
 gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$sa_email
@@ -89,6 +89,6 @@ deck_pod=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpa
 until [[ "${deck_pod_status:-}" = "Running" ]]
 do
     deck_pod_status=$(kubectl get pods $deck_pod --namespace default -o jsonpath='{.status.phase}')
-    sleep 2
+    sleep $API_RETRY_INTERVAL_SEC
 done
 kubectl port-forward --namespace default $deck_pod $SPINNAKER_LOCAL_MAP_PORT:9000 >> /dev/null &
