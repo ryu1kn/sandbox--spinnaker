@@ -45,6 +45,14 @@ gsutil mb -c regional -l $REGION gs://$SPINNAKER_CONFIG_BUCKET
 sa_json=$(cat $spinnaker_key)
 
 cat > $spinnaker_config <<EOF
+# See https://github.com/helm/charts/blob/master/stable/spinnaker/values.yaml
+
+spinnakerFeatureFlags:
+  - artifacts
+  - jobs
+  - pipeline-templates
+  - managed-pipeline-templates-v2-ui
+
 gcs:
   enabled: true
   bucket: $SPINNAKER_CONFIG_BUCKET
@@ -82,8 +90,6 @@ halyard:
           --message-format GCR
       config_misc.sh: |-
         \$HAL_COMMAND config edit --timezone 'Australia/Melbourne'
-        \$HAL_COMMAND config features edit --pipeline-templates true
-        \$HAL_COMMAND config features edit --managed-pipeline-templates-v2-ui true
 EOF
 
 # Deploy the Spinnaker chart
