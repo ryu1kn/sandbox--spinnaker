@@ -6,7 +6,7 @@
 * `spin-gate` is accessible
 
     ```sh
-    $ kubectl port-forward --namespace default spin-gate-bfb7fcc94-vznn9 8084:8084 >> /dev/null &
+    $ kubectl port-forward --namespace default $(kubectl get po -l cluster=spin-gate -o jsonpath='{.items[0].metadata.name}') 8084:8084 >> /dev/null &
     ```
 
 ## Refs
