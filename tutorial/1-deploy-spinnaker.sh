@@ -94,3 +94,10 @@ do
     sleep $API_RETRY_INTERVAL_SEC
 done
 kubectl port-forward --namespace default $deck_pod $SPINNAKER_LOCAL_MAP_PORT:9000 >> /dev/null &
+
+all_pods=DUMMY
+until [[ "$all_pods" = "" ]]
+do
+    all_pods=$(kubectl get pods --selector=app=spin -o jsonpath='{.items[*].status.phase}' | tr ' ' '\n' | sort | uniq | fgrep -v 'Running' || true)
+done
+echo Spinnaker is up and running!
