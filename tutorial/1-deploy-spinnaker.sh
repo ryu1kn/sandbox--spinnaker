@@ -81,6 +81,9 @@ halyard:
           --json-path /opt/gcs/key.json \
           --project $PROJECT \
           --message-format GCR
+      enable_pipeline_template.sh: |-
+        \$HAL_COMMAND config features edit --pipeline-templates true
+        \$HAL_COMMAND config features edit --managed-pipeline-templates-v2-ui true
 EOF
 
 # Deploy the Spinnaker chart
