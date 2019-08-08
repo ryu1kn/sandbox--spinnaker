@@ -14,7 +14,7 @@ gcloud beta pubsub subscriptions delete $PUBSUB_SUBSCRIPTION
 gcloud beta pubsub topics delete projects/$PROJECT/topics/$PUBSUB_TOPIC
 
 helm delete --purge $RELEASE_NAME
-kubectl delete -f $APP_DIR/k8s/services
+kubectl delete -f $APP_DIR/k8s/services || true
 
 sa_email=$(getServiceAccountEmail $SERVICE_ACCOUNT_DISPLAY_NAME)
 gcloud projects remove-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$sa_email
