@@ -88,9 +88,9 @@ EOF
 # Deploy the Spinnaker chart
 helm install --name $RELEASE_NAME stable/spinnaker -f $spinnaker_config --version $SPINNAKER_VERSION --timeout 600 --wait
 deck_pod=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
-until [[ "${deck_pod_status:-}" = "Running" ]]
+until [[ "${deck_pod_ready:-}" = true ]]
 do
-    deck_pod_status=$(kubectl get pods $deck_pod --namespace default -o jsonpath='{.status.phase}')
+    deck_pod_ready=$(kubectl get pods $deck_pod --namespace default -o jsonpath='{.status.containerStatuses.*.ready}')
     sleep $API_RETRY_INTERVAL_SEC
 done
 kubectl port-forward --namespace default $deck_pod $SPINNAKER_LOCAL_MAP_PORT:9000 >> /dev/null &
