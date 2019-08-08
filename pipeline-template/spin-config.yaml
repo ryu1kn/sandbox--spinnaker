@@ -1,0 +1,4 @@
+gate:
+  endpoint: http://localhost:8084
+auth:
+  enabled: false
