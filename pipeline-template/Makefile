@@ -1,15 +1,20 @@
-template_file := pipeline-tpl.json
-pipeline_file := pipeline.json
 config_file := spin-config.yaml
+app_name := foo-app
 
 get-pi:
-	@spin pipeline get --application foobarapp --name foobarpipeline --config $(config_file)
+	spin pipeline get --application $(app_name) --name $(pipeline_name) --config $(config_file)
 
 render-pi:
-	spin pipeline-templates plan --file $(pipeline_file) --config $(config_file)
+	spin pipeline-templates plan --file $(pipeline_name).json --config $(config_file)
 
 save-pi:
-	spin pipeline save --file $(pipeline_file) --config $(config_file)
+	spin pipeline save --file $(pipeline_name).json --config $(config_file)
 
 save-tpl:
-	spin pipeline-templates save --file $(template_file) --config $(config_file)
+	spin pipeline-templates save --file $(template_name).json --config $(config_file)
+
+save-app:
+	spin application save --application-name $(app_name) \
+		--owner-email example@example.com \
+		--cloud-providers kubernetes \
+		--config $(config_file)
