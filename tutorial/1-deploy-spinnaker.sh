@@ -5,7 +5,6 @@ set -xeuo pipefail
 . "$(dirname $0)/config.sh"
 . "$(dirname $0)/lib/helpers.sh"
 
-spinnaker_version=1.14.0
 spinnaker_key=__spinnaker-sa.json
 spinnaker_config=__spinnaker-config.yaml
 
@@ -65,9 +64,9 @@ minio:
 
 # Configure Spinnaker to enable GCP services
 halyard:
-  spinnakerVersion: $spinnaker_version
+  spinnakerVersion: $SPINNAKER_VERSION
   image:
-    tag: 1.22.2
+    tag: $HALYARD_VERSION
   additionalScripts:
     create: true
     data:
@@ -87,7 +86,7 @@ halyard:
 EOF
 
 # Deploy the Spinnaker chart
-helm install --name $RELEASE_NAME stable/spinnaker -f $spinnaker_config --version $spinnaker_version --timeout 600 --wait
+helm install --name $RELEASE_NAME stable/spinnaker -f $spinnaker_config --version $SPINNAKER_VERSION --timeout 600 --wait
 deck_pod=$(kubectl get pods --namespace default -l "cluster=spin-deck" -o jsonpath="{.items[0].metadata.name}")
 until [[ "${deck_pod_status:-}" = "Running" ]]
 do

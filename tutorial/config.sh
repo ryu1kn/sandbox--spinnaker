@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SPINNAKER_VERSION=1.14.0
+HALYARD_VERSION=1.22.2
+
 REGION=australia-southeast1
 ZONE=$REGION-a
 
