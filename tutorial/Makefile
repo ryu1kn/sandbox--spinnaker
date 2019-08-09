@@ -1,3 +1,5 @@
+map-ports: map-deck map-orca
+
 map-deck:
 	kubectl port-forward --namespace default $(shell kubectl get po -l cluster=spin-deck -o jsonpath='{.items[0].metadata.name}') 8080:9000 >> /dev/null &
 
