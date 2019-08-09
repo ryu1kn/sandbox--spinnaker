@@ -1,9 +1,6 @@
 config_file := spin-config.yaml
 app_name := foo-app
 
-map-port:
-	kubectl port-forward --namespace default $(shell kubectl get po -l cluster=spin-gate -o jsonpath='{.items[0].metadata.name}') 8084:8084 >> /dev/null &
-
 get-pi:
 	spin pipeline get --application $(app_name) --name $(pipeline_name) --config $(config_file)
 
