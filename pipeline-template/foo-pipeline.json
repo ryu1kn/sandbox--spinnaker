@@ -1,0 +1,17 @@
+{
+  "schema": "v2",
+  "application": "foo-app",
+  "name": "foo-pipeline",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://foo-template",
+    "type": "front50/pipelineTemplate"
+  },
+  "variables": {
+    "timeToWait": 3
+  },
+  "parameters": [],
+  "notifications": [],
+  "description": "Foo pipeline",
+  "stages": []
+}
