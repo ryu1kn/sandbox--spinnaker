@@ -75,6 +75,12 @@ halyard:
   spinnakerVersion: $SPINNAKER_VERSION
   image:
     tag: $HALYARD_VERSION
+
+  additionalServiceSettings:
+    orca.yml:
+      env:
+        JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8183"     # For remote debugging
+
   additionalScripts:
     create: true
     data:
