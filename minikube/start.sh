@@ -2,7 +2,7 @@
 
 set -xeuo pipefail
 
-minikube start
+minikube start --cpus 4 --memory 8192
 helm init --wait
 helm install --name my-spinnaker stable/spinnaker --timeout 600
 kubectl expose deployment spin-deck --type=NodePort --name=spin-deck-2
