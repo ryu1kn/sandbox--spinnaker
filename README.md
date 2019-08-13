@@ -12,3 +12,4 @@ See [tutorial README](./tutorial/README.md).
 ## Refs
 
 * [Spinnaker](https://www.spinnaker.io/)
+* [Configuring Spinnaker](https://www.travistomsu.com/2016/12/19/configuring-spinnaker/)
