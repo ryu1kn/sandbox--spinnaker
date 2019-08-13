@@ -37,7 +37,7 @@ kubectl create serviceaccount tiller --namespace kube-system
 kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 kubectl create clusterrolebinding --clusterrole=cluster-admin --serviceaccount=default:default spinnaker-admin
 helm init --service-account=tiller --wait
-helm update
+helm repo update
 helm version
 
 # Configure Spinnaker
