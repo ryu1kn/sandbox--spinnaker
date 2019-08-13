@@ -3,11 +3,7 @@
 
 ## Prerequisite
 
-* `spin-gate` is accessible
-
-    ```sh
-    $ kubectl port-forward --namespace default $(kubectl get po -l cluster=spin-gate -o jsonpath='{.items[0].metadata.name}') 8084:8084 >> /dev/null &
-    ```
+* `spin-gate` is accessible: `http://deck-url/gate`
 
 ## Refs
 

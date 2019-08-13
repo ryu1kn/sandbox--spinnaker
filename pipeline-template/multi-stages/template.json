@@ -1,0 +1,41 @@
+{
+  "schema": "v2",
+  "id": "double-wait",
+  "protect": false,
+  "metadata": {
+    "name": "Double wait",
+    "description": "Wait twice, one configurable",
+    "owner": "example@example.com",
+    "scopes": ["global"]
+  },
+  "parameterConfig": [
+    {
+      "type": "int",
+      "default": "${trigger['parentExecution']['trigger']['parameters']['timeToWait']}",
+      "description": "The time a wait stage shall pauseth",
+      "name": "timeToWait"
+    }
+  ],
+  "pipeline": {
+    "keepWaitingPipelines": false,
+    "stages": [
+      {
+        "refId": "1",
+        "type": "wait",
+        "name": "First wait",
+        "comments": "First, wait",
+        "requisiteStageRefIds": [],
+        "waitTime": 2
+      },
+      {
+        "refId": "2",
+        "type": "wait",
+        "name": "Second wait",
+        "comments": "Then wait",
+        "requisiteStageRefIds": ["1"],
+        "waitTime": "${parameters.timeToWait}"
+      }
+    ],
+    "triggers": []
+  }
+}

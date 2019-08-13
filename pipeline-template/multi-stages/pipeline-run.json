@@ -1,0 +1,38 @@
+{
+  "application": "composition-app",
+  "name": "run-my-double-wait",
+  "keepWaitingPipelines": false,
+  "limitConcurrent": true,
+  "parameterConfig": [
+    {
+      "type": "int",
+      "default": 2,
+      "description": "The time a wait stage shall pauseth",
+      "name": "timeToWait"
+    }
+  ],
+  "stages": [
+    {
+      "refId": "1",
+      "type": "pipeline",
+      "name": "Double wait",
+      "application": "composition-app",
+      "pipeline": "${#pipelineId(\"my-double-wait\")}",
+      "pipelineParameters": {
+        "timeToWait": 5
+      },
+      "comments": "Invoke double wait step",
+      "requisiteStageRefIds": [],
+      "waitForCompletion": true
+    },
+    {
+      "refId": "2",
+      "type": "wait",
+      "name": "Final wait",
+      "comments": "And finally wait",
+      "requisiteStageRefIds": ["1"],
+      "waitTime": 1
+    }
+  ],
+  "triggers": []
+}

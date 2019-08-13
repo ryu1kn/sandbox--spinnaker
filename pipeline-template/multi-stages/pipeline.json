@@ -1,0 +1,22 @@
+{
+  "schema": "v2",
+  "application": "composition-app",
+  "name": "my-double-wait",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://double-wait",
+    "type": "front50/pipelineTemplate"
+  },
+  "parameterConfig": [
+    {
+      "default": "${trigger['parentExecution']['trigger']['parameters']['timeToWait']}",
+      "description": "The time a wait stage shall pauseth",
+      "type": "int",
+      "name": "timeToWait"
+    }
+  ],
+  "parameters": [],
+  "notifications": [],
+  "description": "my-double-wait",
+  "stages": []
+}

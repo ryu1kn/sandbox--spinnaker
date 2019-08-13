@@ -1,0 +1,27 @@
+{
+  "application": "composition-app",
+  "name": "run-my-single-wait",
+  "keepWaitingPipelines": false,
+  "limitConcurrent": true,
+  "parameterConfig": [
+    {
+      "type": "int",
+      "default": 5,
+      "description": "",
+      "name": "timeToWait"
+    }
+  ],
+  "stages": [
+    {
+      "refId": "1",
+      "type": "pipeline",
+      "name": "Single wait",
+      "application": "composition-app",
+      "pipeline": "${#pipelineId(\"my-single-wait\")}",
+      "comments": "Invoke single wait step",
+      "requisiteStageRefIds": [],
+      "waitForCompletion": true
+    }
+  ],
+  "triggers": []
+}

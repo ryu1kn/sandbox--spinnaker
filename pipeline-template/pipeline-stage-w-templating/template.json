@@ -1,0 +1,34 @@
+{
+  "schema": "v2",
+  "id": "single-wait",
+  "parameterConfig": [
+    {
+      "type": "int",
+      "default": "${trigger['parentExecution']['trigger']['parameters']['timeToWait']}",
+      "name": "timeToWait"
+    }
+  ],
+  "protect": false,
+  "metadata": {
+    "name": "Single wait",
+    "description": "Wait once, configurable",
+    "owner": "example@example.com",
+    "scopes": [
+      "global"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": false,
+    "stages": [
+      {
+        "refId": "1",
+        "type": "wait",
+        "name": "Wait",
+        "comments": "Wait!",
+        "requisiteStageRefIds": [],
+        "waitTime": "${parameters['timeToWait']}"
+      }
+    ],
+    "triggers": []
+  }
+}
