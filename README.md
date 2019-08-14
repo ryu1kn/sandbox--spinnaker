@@ -9,6 +9,10 @@ See [minikube README](./minikube/README.md).
 
 See [tutorial README](./tutorial/README.md).
 
+## Spinnaker pipeline template
+
+See [pipeline-template README](./pipeline-template/multi-stages/README.md)
+
 ## Refs
 
 * [Spinnaker](https://www.spinnaker.io/)

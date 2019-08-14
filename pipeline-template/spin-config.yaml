@@ -1,4 +1,4 @@
 gate:
-  endpoint: http://localhost:8084
+  endpoint: http://localhost:8080/gate
 auth:
   enabled: false
