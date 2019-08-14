@@ -1,1 +1,3 @@
 __*
+*.tfstate*
+.terraform
