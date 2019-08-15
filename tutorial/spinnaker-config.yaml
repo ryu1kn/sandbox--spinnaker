@@ -1,0 +1,51 @@
+# See https://github.com/helm/charts/blob/master/stable/spinnaker/values.yaml
+
+spinnakerFeatureFlags:
+  - artifacts
+  - jobs
+  - pipeline-templates
+  - managed-pipeline-templates-v2-ui
+
+gcs:
+  enabled: true
+  bucket: ${spinnaker_config_bucket}
+  project: ${project_id}
+  jsonKey: '${sa_json}'
+
+dockerRegistries:
+- name: gcr
+  address: https://gcr.io
+  username: _json_key
+  password: '${sa_json}'
+  email: 1234@5678.com
+
+# Disable minio as the default storage backend
+minio:
+  enabled: false
+
+# Configure Spinnaker to enable GCP services
+halyard:
+  spinnakerVersion: ${spinnaker_version}
+  image:
+    tag: ${halyard_version}
+
+  additionalServiceSettings:
+    orca.yml:
+      env:
+        JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8183"     # For remote debugging
+
+  additionalScripts:
+    create: true
+    data:
+      enable_gcs_artifacts.sh: |-
+        $HAL_COMMAND config artifact gcs account add gcs-${project_id} --json-path /opt/gcs/key.json
+        $HAL_COMMAND config artifact gcs enable
+      enable_pubsub_triggers.sh: |-
+        $HAL_COMMAND config pubsub google enable
+        $HAL_COMMAND config pubsub google subscription add ${pubsub_subscription} \
+          --subscription-name ${pubsub_subscription} \
+          --json-path /opt/gcs/key.json \
+          --project ${project_id} \
+          --message-format GCR
+      config_misc.sh: |-
+        $HAL_COMMAND config edit --timezone 'Australia/Melbourne'
