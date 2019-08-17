@@ -1,4 +1,3 @@
-
 variable "access_token" {}
 variable "project_id" {}
 variable "billing_account" {}
@@ -31,11 +30,8 @@ provider "google-beta" {
   zone = "${var.region}-a"
 }
 
-resource "google_project" "my_project" {
-  name = "Sandbox Spinnaker"
+data "google_project" "my_project" {
   project_id = var.project_id
-  billing_account = var.billing_account
-  skip_delete = true
 }
 
 resource "google_project_service" "googleapi_container" {
@@ -88,11 +84,12 @@ resource "google_container_node_pool" "my_node_pool" {
 
 resource "google_service_account" "spinnaker_account" {
   account_id = "spinnaker-account"
+  display_name = "spinnaker-account"
 }
 
-resource "google_project_iam_member" "project" {
+resource "google_project_iam_binding" "spinnaker_account" {
   role = "roles/storage.admin"
-  member = "serviceAccount:${google_service_account.spinnaker_account.email}"
+  members = ["serviceAccount:${google_service_account.spinnaker_account.email}"]
 }
 
 resource "google_service_account_key" "spinnaker_account_key" {
@@ -110,11 +107,11 @@ resource "google_pubsub_subscription" "pubsub_subscription" {
   topic = google_pubsub_topic.pubsub_topic.name
 }
 
-resource "google_pubsub_subscription_iam_member" "pubsub_role" {
+resource "google_pubsub_subscription_iam_binding" "pubsub_role" {
   provider = "google-beta"
   subscription = google_pubsub_subscription.pubsub_subscription.name
   role = "roles/pubsub.subscriber"
-  member = "serviceAccount:${google_service_account.spinnaker_account.email}"
+  members = ["serviceAccount:${google_service_account.spinnaker_account.email}"]
 }
 
 resource "google_storage_bucket" "spinnaker_config_bucket" {
@@ -211,6 +208,10 @@ data "helm_repository" "canonical" {
 }
 
 resource "helm_release" "spinnaker" {
+  depends_on = [
+    google_container_node_pool.my_node_pool,
+    google_project_iam_binding.spinnaker_account
+  ]
   name = var.release_name
   repository = "${data.helm_repository.canonical.metadata.0.name}"
   chart = "stable/spinnaker"
