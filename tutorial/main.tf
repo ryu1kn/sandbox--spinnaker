@@ -236,6 +236,7 @@ data "template_file" "spinnaker_config" {
 }
 
 resource "google_sourcerepo_repository" "my-repo" {
+  provider = "google-beta"
   name = var.app_repo_name
 }
 
