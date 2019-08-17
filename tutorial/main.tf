@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    helm = "0.10.2"
+    template = "2.1.2"
+    kubernetes = "1.8.1"
+
+    # Stay on 2.12 for now
+    # https://github.com/terraform-providers/terraform-provider-google/issues/4276
+    google = "2.12.0"
+    google-beta = "2.12.0"
+  }
+}
+
 variable "access_token" {}
 variable "project_id" {}
 variable "billing_account" {}
