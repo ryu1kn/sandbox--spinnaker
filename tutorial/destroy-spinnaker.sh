@@ -9,7 +9,8 @@ current_dir="$(dirname $0)"
 (cd "$current_dir" \
     && terraform destroy \
         -var="project_id=$PROJECT_ID" \
-        -var="app_repo_name=APP_REPO_NAME"
+        -var="cluster_name=$CLUSTER_NAME" \
+        -var="app_repo_name=$APP_REPO_NAME"
 )
 
 rm -rf "$APP_DIR"

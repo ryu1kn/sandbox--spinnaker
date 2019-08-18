@@ -21,6 +21,7 @@ variable "release_name" {}
 variable "spinnaker_version" {}
 variable "halyard_version" {}
 variable "app_repo_name" {}
+variable "cluster_name" {}
 
 locals {
   spinnaker_config_bucket = "${var.project_id}-spinnaker-config"
@@ -62,7 +63,7 @@ resource "google_project_service" "googleapi_sourcerepo" {
 }
 
 resource "google_container_cluster" "my_cluster" {
-  name = "spinnaker-tutorial"
+  name = var.cluster_name
   remove_default_node_pool = true
   initial_node_count = 1
   master_auth {
