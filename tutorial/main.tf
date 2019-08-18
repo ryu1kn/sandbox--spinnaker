@@ -11,18 +11,6 @@ terraform {
   }
 }
 
-variable "access_token" {}
-variable "project_id" {}
-variable "pubsub_topic" {}
-variable "pubsub_subscription" {}
-variable "region" {}
-variable "user_email" {}
-variable "release_name" {}
-variable "spinnaker_version" {}
-variable "halyard_version" {}
-variable "app_repo_name" {}
-variable "cluster_name" {}
-
 locals {
   spinnaker_config_bucket = "${var.project_id}-spinnaker-config"
   kube_manifest_bucket = "${var.project_id}-kubernetes-manifests"
@@ -89,7 +77,7 @@ resource "google_container_node_pool" "my_node_pool" {
       "https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/service.management.readonly",
       "https://www.googleapis.com/auth/trace.append",
-      "https://www.googleapis.com/auth/servicecontrol",
+      "https://www.googleapis.com/auth/servicecontrol"
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
