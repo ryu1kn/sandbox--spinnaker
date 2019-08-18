@@ -8,10 +8,9 @@ Gradually I replaced UI operations with cli commands to easily deploy/delete new
 ## Prerequisites
 
 * Docker
-* [helm](https://helm.sh/)
+* [Terraform](https://www.terraform.io)
 * [Spin CLI](https://www.spinnaker.io/guides/spin/)
 * `jq`: `brew install jq`
-* [Terraform](https://www.terraform.io)
 * Environment variable `GCP_BILLING_ACCOUNT_ID` is set
 * Authenticated to GCP with `gcloud auth login`
 
@@ -28,6 +27,23 @@ Gradually I replaced UI operations with cli commands to easily deploy/delete new
     ```
 
 1. Run `deploy-spinnaker.sh`.
+
+    **Note**: The command may fail with the following error. Just re-run the script, it should succeed.
+
+    ```
+    Error: Error creating Repository: googleapi: Error 403: Cloud Source Repositories API has not been used in project 999999999999 before or it is disabled. Enable it by visiting https://console.cloud.google.com/apis/api/sourcerepo.googleapis.com/overview?project=999999999999 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+
+      on main.tf line 243, in resource "google_sourcerepo_repository" "my-repo":
+     243: resource "google_sourcerepo_repository" "my-repo" {
+
+
+
+    Error: Error creating Trigger: googleapi: Error 403: Access Not Configured. Cloud Build has not been used in project your-spinnaker-project before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudbuild.googleapis.com/overview?project=your-spinnaker-project then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+
+      on main.tf line 258, in resource "google_cloudbuild_trigger" "trigger":
+     258: resource "google_cloudbuild_trigger" "trigger" {
+    ```
+
 1. Deploy sample app and its spinnaker pipeline by running `create-pipeline.sh`.
 1. Open http://localhost:8080 and you'll see Spinnaker UI.
 
