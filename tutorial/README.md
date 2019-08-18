@@ -22,13 +22,15 @@ Gradually I replaced UI operations with cli commands to easily deploy/delete new
 1. Set following environment variables:
 
     ```sh
+    export PROJECT_ID="project-id-where-i-deploy-spinnaker-to"
     export TF_VAR_access_token="$(gcloud auth print-access-token)"
     export TF_VAR_user_email="$(gcloud config get-value account)"
     ```
 
-1. Run scripts one-by-one in order except `*-teardown.sh`.
+1. Run `deploy-spinnaker.sh`.
+1. Deploy sample app and its spinnaker pipeline by running `create-pipeline.sh`.
 1. Open http://localhost:8080 and you'll see Spinnaker UI.
 
 ## Teardown Spinnaker
 
-1. Run `*-teardown.sh`
+1. Run `destroy-spinnaker.sh`
