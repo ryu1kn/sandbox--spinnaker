@@ -201,6 +201,7 @@ resource "kubernetes_cluster_role_binding" "spinnaker_admin_binding" {
   subject {
     kind = "ServiceAccount"
     name = "default"
+    namespace = "default"
   }
 }
 
@@ -223,7 +224,10 @@ data "helm_repository" "canonical" {
 resource "helm_release" "spinnaker" {
   depends_on = [
     google_container_node_pool.my_node_pool,
-    google_project_iam_binding.spinnaker_account
+    google_project_iam_binding.spinnaker_account,
+    kubernetes_cluster_role_binding.user_admin_binding,
+    kubernetes_cluster_role_binding.tiller_admin_binding,
+    kubernetes_cluster_role_binding.spinnaker_admin_binding
   ]
   name = var.release_name
   repository = "${data.helm_repository.canonical.metadata.0.name}"
