@@ -17,6 +17,6 @@ git commit -m "Initial commit"
 
 git config credential.helper gcloud.sh
 
-git remote add origin https://source.developers.google.com/p/$PROJECT/r/$APP_REPO_NAME
+git remote add origin https://source.developers.google.com/p/$PROJECT_ID/r/$APP_REPO_NAME
 
 git push origin master

@@ -13,5 +13,5 @@ spin application save --application-name sample \
     --owner-email example@example.com \
     --cloud-providers kubernetes \
     --gate-endpoint $spinnaker_gate_url
-sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json > $pipeline_file
+sed s/PROJECT/$PROJECT_ID/g spinnaker/pipeline-deploy.json > $pipeline_file
 spin pipeline save --gate-endpoint $spinnaker_gate_url -f $pipeline_file
