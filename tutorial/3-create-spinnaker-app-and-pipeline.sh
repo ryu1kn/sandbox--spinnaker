@@ -4,10 +4,8 @@ set -xeuo pipefail
 
 . "$(dirname $0)/config.sh"
 
-##########################
-## Configuring your deployment pipelines
 pipeline_file=__pipeline.json
-spinnaker_gate_url=http://localhost:$SPINNAKER_LOCAL_MAP_PORT/gate
+spinnaker_gate_url=http://localhost:8080/gate
 
 cd $APP_DIR
 

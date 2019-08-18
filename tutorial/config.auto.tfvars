@@ -1,4 +1,4 @@
-project_id = "sandbox--spinnaker-3"
+project_id = "sandbox--spinnaker"
 pubsub_topic = "gcr"
 pubsub_subscription = "gcr-triggers"
 region = "australia-southeast1"

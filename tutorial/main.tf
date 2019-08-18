@@ -13,7 +13,6 @@ terraform {
 
 variable "access_token" {}
 variable "project_id" {}
-variable "billing_account" {}
 variable "pubsub_topic" {}
 variable "pubsub_subscription" {}
 variable "region" {}
