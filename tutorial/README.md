@@ -30,7 +30,7 @@ Gradually I replaced UI operations with cli commands to easily deploy/delete new
 ```sh
 export TF_VAR_access_token="$(gcloud auth print-access-token)"
 export TF_VAR_billing_account="$GCP_BILLING_ACCOUNT_ID"
-export TF_VAR_user_email=your@gmail.com
+export TF_VAR_user_email="$(gcloud config get-value account)"
 terraform init
 ```
 
