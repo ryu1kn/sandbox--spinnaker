@@ -17,6 +17,7 @@ download_sample_app() {
     package_name=$APP_DIR.tgz
     wget -O $package_name https://gke-spinnaker.storage.googleapis.com/sample-app-v2.tgz
     mkdir $APP_DIR && tar xzfv $package_name -C $APP_DIR --strip-components 1
+    rm -f $package_name
 }
 
 initialise_app_repo() {
@@ -49,3 +50,5 @@ push_tag() {
     git tag v1.0.0
     git push --tags
 }
+
+main
