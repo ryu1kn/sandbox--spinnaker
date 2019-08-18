@@ -9,6 +9,7 @@ spinnaker_gate_url=http://localhost:$LOCAL_SPINNAKER_PORT/gate
 
 main() {
     download_sample_app
+    setup_spinnaker_pipeline
     initialise_app_repo
     push_tag
 }
