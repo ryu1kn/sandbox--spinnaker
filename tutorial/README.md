@@ -50,3 +50,7 @@ Gradually I replaced UI operations with cli commands to easily deploy/delete new
 ## Teardown Spinnaker
 
 1. Run `destroy-spinnaker.sh`
+
+## Refs
+
+* [NGINX Ingress Controller Installation Guide](https://kubernetes.github.io/ingress-nginx/deploy/)
