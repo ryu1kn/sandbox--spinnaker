@@ -18,5 +18,5 @@ gcloud alpha billing projects link $PROJECT_ID --billing-account $GCP_BILLING_AC
         -var="app_repo_name=$APP_REPO_NAME"
 )
 
-gcloud container clusters get-credentials $CLUSTER_NAME
+gcloud container clusters get-credentials $CLUSTER_NAME --project $PROJECT_ID
 kubectl port-forward svc/spin-deck $LOCAL_SPINNAKER_PORT:9000 >> /dev/null &
