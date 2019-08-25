@@ -9,5 +9,8 @@ charset = utf-8
 trim_trailing_whitespace = true
 indent_size = 4
 
-[Makefile]
+[Makefile,*.mk]
 indent_style = tab
+
+[*.{tf,json,yaml,yml}]
+indent_size = 2
