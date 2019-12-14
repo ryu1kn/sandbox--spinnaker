@@ -13,6 +13,10 @@ See [tutorial README](./tutorial/README.md).
 
 See [pipeline-template README](./pipeline-template/multi-stages/README.md)
 
+## Spinnaker on Local machine
+
+See [local README](./local/README.md)
+
 ## Refs
 
 * [Spinnaker](https://www.spinnaker.io/)
