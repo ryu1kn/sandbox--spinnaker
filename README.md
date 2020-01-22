@@ -9,13 +9,17 @@ See [minikube README](./minikube/README.md).
 
 See [tutorial README](./tutorial/README.md).
 
-## Spinnaker pipeline template
-
-See [pipeline-template README](./pipeline-template/multi-stages/README.md)
-
 ## Spinnaker on Local machine
 
 See [local README](./local/README.md)
+
+## Spinnaker on Kind
+
+Extracted as a separate repository [ryu1kn/spinnaker-on-kind](https://github.com/ryu1kn/spinnaker-on-kind)
+
+## Spinnaker pipeline template
+
+See [pipeline-template README](./pipeline-template/multi-stages/README.md)
 
 ## Refs
 
